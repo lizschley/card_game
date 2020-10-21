@@ -32,10 +32,44 @@ def test_shuffle_deck(card_game, sort_colors):
     assert random_deck_check(color_list, card_game.deck)
 
 
-def sorted_deck_check(sort_order, sorted_deck):
-    for sorted_card in sorted_deck:
-        print(f'sorted card=={sorted_card}')
+def test_extra_colors_error_message(card_game, extra_colors):
+    color_list = extra_colors
+    card_game.make_card_deck()
+    message = card_game.check_for_discrepency(color_list)
+    assert 'colors will be ignored' in message[0]
 
+
+def test_extra_colors_ignores_colors_not_in_deck(card_game, sort_colors, extra_colors):
+    card_game.make_card_deck(sort_colors[0])
+    card_game.sort_deck(extra_colors)
+    assert sorted_deck_check(sort_colors[0], card_game.deck)
+
+
+def test_missing_colors_sort_last(card_game, sort_colors, missing_colors):
+    color_list = sort_colors[0]
+    card_game.make_card_deck(color_list)
+    card_game.sort_deck(missing_colors)
+    missing_colors.append('green')
+    assert sorted_deck_check(missing_colors, card_game.deck)
+
+
+def test_missing_colors_error_message(card_game, missing_colors):
+    color_list = missing_colors
+    card_game.make_card_deck()
+    message = card_game.check_for_discrepency(color_list)
+    assert 'sort at bottom' in message[0]
+
+
+def test_handles_index_error_after_using_up_deck(card_game):
+    compare_num = len(card_game.deck)
+    for x in range(20):
+        gc = card_game.take_turn('Ninja')
+        if gc is None:
+            break
+    assert card_game.num_turns == compare_num
+
+
+def sorted_deck_check(sort_order, sorted_deck):
     if sorted_deck[0].color_name != sort_order[0]:
         return False
     if sorted_deck[4].color_name != sort_order[1]:

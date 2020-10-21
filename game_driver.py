@@ -2,8 +2,7 @@
      driver for card game
 
      Usage
-     >>> python game_driver.py Ninja Ronin
-
+     >>> python game_driver.py name_1 name_2
     Note - must have > one name listed after file name
 '''
 from game_classes.card_game import CardGame
