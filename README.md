@@ -5,6 +5,8 @@
 * Clone the code >>> git clone git@github.com:lizschley/card_game.git
 
 * Make sure to create in a virtual environment
+* to run test >> PYTHONPATH=. pytest
+* Can also use the test explorer tool that comes with vscode
 
 Usage >>> python game_driver.py player_1 player_2
 
