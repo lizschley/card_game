@@ -12,6 +12,7 @@ Thumbs.db
 # Byte-compiled / optimized / DLL files
 __pycache__/
 tests/__pycache__
+game_classes/__pycache__/
 *.py[cod]
 *$py.class
 CACHE/

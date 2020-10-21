@@ -69,6 +69,24 @@ def test_handles_index_error_after_using_up_deck(card_game):
     assert card_game.num_turns == compare_num
 
 
+def test_displays_the_player_with_more_points(card_game):
+    card_game.score_sheet['Ninja'] = 30
+    card_game.score_sheet['Ronin'] = 20
+    winning_player = card_game.find_winner()
+    print(f'---- more pointes, winning_player == {winning_player}')
+    assert 'Ninja' in winning_player
+    assert 'Ronin' not in winning_player
+
+
+def test_find_winner_handles_ties(card_game):
+    card_game.score_sheet['Ninja'] = 20
+    card_game.score_sheet['Ronin'] = 20
+    winning_player = card_game.find_winner()
+    print(f'---- tie, winning_player == {winning_player}')
+    assert 'Ninja' in winning_player
+    assert 'Ronin' in winning_player
+
+
 def sorted_deck_check(sort_order, sorted_deck):
     if sorted_deck[0].color_name != sort_order[0]:
         return False

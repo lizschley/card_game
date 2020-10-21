@@ -10,6 +10,14 @@ class CardGame:
     DEFAULT_COLORS = ['yellow', 'green', 'red']
 
     def __init__(self, players):
+        '''
+        __init__ for CardGame
+
+        sets the process data for the game
+
+        :param players: list of player names
+        :type players: list
+        '''
         self.players = players
         self.last_player = players[-1]
         self.score_sheet = {}
@@ -24,11 +32,19 @@ class CardGame:
         self.__init__(players)
 
     def play_game(self):
+        '''
+        play_game driver to play the game
+        '''
         self.make_card_deck()
         self.shuffle_deck()
         self.game_loop()
 
     def game_loop(self):
+        '''
+        game_loop players take turns getting cards and adding them to their score
+        1. Can end by user request
+        2. Can end when the cards when there are not enough cards for each player to get one
+        '''
         while len(self.deck) > 0:
             stop = self.time_to_stop()
             if stop:
@@ -47,6 +63,12 @@ class CardGame:
                 print(' ')
 
     def user_stop_request(self):
+        '''
+        user_stop_request if the user enters q or Q as the first or only letter, game stops
+
+        :return: True if the user enters q or Q, otherwise return False
+        :rtype: bool
+        '''
         self.print_message(self.turn_message())
         reply = input()
         try:
@@ -56,6 +78,11 @@ class CardGame:
             return False
 
     def end_game(self):
+        '''
+        end_game when the game ends, a winner is determined
+
+        [extended_summary]
+        '''
         self.print_message(self.results_message())
         self.deck = []
 
@@ -122,10 +149,10 @@ class CardGame:
             print(msg)
 
     def find_winner(self):
-        max_value = max(self.score_sheet.items(), key=operator.itemgetter(1))[0]
+        max_value = max(self.score_sheet.values())
         max_list = [k for k, v in self.score_sheet.items() if v == max_value]
         if not max_list:
-            return max_value
+            return max(self.score_sheet.items(), key=operator.itemgetter(1))[0]
         return ' and '.join(max_list)
 
     def take_turn(self, player):
