@@ -5,14 +5,14 @@
 * Clone the code >>> git clone git@github.com:lizschley/card_game.git
 
 * Make sure to create in a virtual environment
-* to run test >> PYTHONPATH=. pytest
+* To run tests >>> PYTHONPATH=. pytest
 * Can also use the test explorer tool that comes with vscode
 
 Usage >>> python game_driver.py player_1 player_2
 
 Note - must have at least two names listed after file name
 
-# Requirements
+## Requirements
 
 Create a card game which supports 3 of the operations below.
 1. Shuffle cards in the deck: randomly mix the cards in the card deck, and return

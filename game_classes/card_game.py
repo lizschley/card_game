@@ -114,7 +114,8 @@ class CardGame:
         * green will sort before red
         * red will sort last
 
-        Then it will sort by card number (each card with a given color has an identical range of numbers)
+        The secondary sort (within the color) will be by card number (each card with a given color
+        has an identical range of numbers)
 
         :param colors: list of color names, defaults to DEFAULT_COLORS
         :type colors: list of strings, optional
@@ -185,7 +186,8 @@ class CardGame:
 
     def equal_turns(self):
         '''
-        equal_turns determines if there are enough turns for every player
+        equal_turns determines if there are enough turns for every player.  If there is not, it returns
+        True.  If there is, it switches the player who is next up
 
         :return: number of turns left where everyone gets a turn
         :rtype: int

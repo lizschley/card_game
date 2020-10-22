@@ -69,12 +69,9 @@ class Card:
 
     def assign_new_color_sort(self, num):
         '''
-        assign_new_color_sort if sorting, you pass in an array of color names and the color_sort
-        is the index of the array
+        assign_new_color_sort, this will be the primary sort which is based on color
 
-        But in the function can be any number
-
-        :param num: list index
+        :param num: sort order of colors
         :type num: int
         '''
         self.color_sort = num
