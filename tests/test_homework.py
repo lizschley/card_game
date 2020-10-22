@@ -3,17 +3,19 @@
 # pylint: disable=redefined-outer-name
 
 import pytest
-import game_classes.card as card
+from game_classes.card import Card
+import game_classes.card as constant
 
 
-@pytest.mark.parametrize('color, card_value, card_total', [('yellow', 2, 4),
-                                                           ('yellow', 8, 16),
-                                                           ('green', 1, 1),
-                                                           ('green', 6, 6),
-                                                           ('red', 5, 15),
-                                                           ('red', 7, 21)])
-def test_card_total(color, card_value, card_total):
-    assert card.COLOR_VALUES[color] * card_value == card_total
+@pytest.mark.parametrize('color, card_value', [('yellow', 2),
+                                               ('yellow', 8),
+                                               ('green', 1),
+                                               ('green', 6),
+                                               ('red', 5),
+                                               ('red', 7)])
+def test_card_total(color, card_value):
+    card = Card(color, card_value)
+    assert constant.COLOR_VALUES[color] * card_value == card.total_value()
 
 
 @pytest.mark.parametrize('color_idx', [(0), (1), (2)])
