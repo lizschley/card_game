@@ -61,6 +61,7 @@ def test_missing_colors_error_message(card_game, missing_colors):
 
 
 def test_handles_index_error_after_using_up_deck(card_game):
+    card_game.make_card_deck()
     compare_num = len(card_game.deck)
     for x in range(20):
         gc = card_game.take_turn('Ninja')
@@ -69,11 +70,22 @@ def test_handles_index_error_after_using_up_deck(card_game):
     assert card_game.num_turns == compare_num
 
 
+def test_scores_are_accurate(card_game):
+    card_game.make_card_deck()
+    total = 0
+    for x in range(20):
+        card_played = card_game.take_turn(card_game.players[card_game.turn_idx])
+        if card_played is None:
+            break
+        total += card_played.total_value()
+        card_game.next_turn()
+    assert card_game.score_sheet['Ninja'] + card_game.score_sheet['Ronin'] == total
+
+
 def test_displays_the_player_with_more_points(card_game):
     card_game.score_sheet['Ninja'] = 30
     card_game.score_sheet['Ronin'] = 20
     winning_player = card_game.find_winner()
-    print(f'---- more pointes, winning_player == {winning_player}')
     assert 'Ninja' in winning_player
     assert 'Ronin' not in winning_player
 
@@ -82,7 +94,6 @@ def test_find_winner_handles_ties(card_game):
     card_game.score_sheet['Ninja'] = 20
     card_game.score_sheet['Ronin'] = 20
     winning_player = card_game.find_winner()
-    print(f'---- tie, winning_player == {winning_player}')
     assert 'Ninja' in winning_player
     assert 'Ronin' in winning_player
 

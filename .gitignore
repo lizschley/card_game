@@ -127,3 +127,4 @@ dmypy.json
 share/
 lib/
 card_game_venv/
+bin/
