@@ -4,7 +4,9 @@
 
 import pytest
 from game_classes.card import Card
+from game_classes.card_game import CardGame
 import game_classes.card as constant
+
 
 
 @pytest.mark.parametrize('color, card_value', [('yellow', 2),
@@ -48,8 +50,8 @@ def test_extra_colors_ignores_colors_not_in_deck(card_game, sort_colors, extra_c
 
 
 def test_missing_colors_sort_last(card_game, sort_colors, missing_colors):
-    color_list = sort_colors[0]
-    card_game.make_card_deck(color_list)
+    colors = CardGame.DEFAULT_COLORS
+    card_game.make_card_deck(colors)
     card_game.sort_deck(missing_colors)
     missing_colors.append('green')
     assert sorted_deck_check(missing_colors, card_game.deck)
