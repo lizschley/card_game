@@ -47,11 +47,7 @@ class CardGame:
         2. Can end when the cards when there are not enough cards for each player to get one
         '''
         while len(self.deck) > 0:
-            stop = self.time_to_stop()
-            if stop:
-                self.end_game()
-                break
-            if self.user_stop_request():
+            if self.time_to_stop():
                 self.end_game()
                 break
             player = self.players[self.turn_idx]
@@ -70,6 +66,8 @@ class CardGame:
         :return: True if the user enters q or Q, otherwise return False
         :rtype: bool
         '''
+        if self.num_turns > 0:
+            self.next_turn()
         self.print_message(self.turn_message())
         reply = input()
         try:
@@ -180,8 +178,8 @@ class CardGame:
         '''
         if not self.equal_turns():
             return True
-        if self.num_turns > 0:
-            self.next_turn()
+        if self.user_stop_request():
+            return True
         return False
 
     def equal_turns(self):
