@@ -1,7 +1,7 @@
 # Card Game
 
 * Developed with Python 3.7.7 and Pytest 5.4.3, no other dependencies
-** Now upgraded to Python 3.9.5 and Pytest 6.2.4
+* --> Now upgraded to Python 3.9.5 and Pytest 6.2.4
 * cd development (or to whatever your common directory is for development)
 * Clone the code >>> git clone git@github.com:lizschley/card_game.git
 
